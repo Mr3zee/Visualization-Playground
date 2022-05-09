@@ -1,4 +1,4 @@
-package sysoev.projects.visualizationPlayground
+package sysoev.projects.visualization
 
 import kotlinx.browser.document
 import react.create

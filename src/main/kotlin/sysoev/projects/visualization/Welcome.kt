@@ -1,4 +1,4 @@
-package sysoev.projects.visualizationPlayground
+package sysoev.projects.visualization
 
 import csstype.px
 import csstype.rgb
