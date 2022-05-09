@@ -11,10 +11,16 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.290-kotlin-1.6.10")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-pre.290-kotlin-1.6.10")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-css:17.0.2-pre.290-kotlin-1.6.10")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom:6.2.1-pre.290-kotlin-1.6.10")
+
+    with(Dependencies.KotlinWrappers) {
+        implementation(enforcedPlatform(wrappersBom))
+        implementation(react)
+        implementation(reactDom)
+        implementation(emotion)
+        implementation(reactRouterDom)
+        implementation(extensions)
+        implementation(browser)
+    }
 }
 
 kotlin {

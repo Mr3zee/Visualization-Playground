@@ -2,9 +2,9 @@ package sysoev.projects.visualizationPlayground
 
 import csstype.px
 import csstype.rgb
+import emotion.react.css
 import react.FC
 import react.Props
-import react.css.css
 import react.dom.html.InputType
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
