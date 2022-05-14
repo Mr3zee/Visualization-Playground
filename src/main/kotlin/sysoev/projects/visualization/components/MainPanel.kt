@@ -1,8 +1,18 @@
 package sysoev.projects.visualization.components
 
-import org.koin.core.component.KoinComponent
+import csstype.*
+import emotion.react.css
 import react.*
+import react.dom.html.ReactHTML.div
 
-//val MainPanel = FC<Props> {
-//
-//}
+
+val MainPanel = FC<PropsWithClassName> {
+    div {
+        css {
+            width = 100.pct
+            height = 100.pct
+
+            backgroundColor = NamedColor.white
+        }
+    }
+}
