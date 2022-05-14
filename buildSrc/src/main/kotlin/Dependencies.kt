@@ -7,11 +7,17 @@ object Dependencies {
 
         val react by kotlinw()
         val reactDom by kotlinw()
+        val reactCss by kotlinw()
         val emotion by kotlinw()
+        val styledNext by kotlinw()
         val reactRouterDom by kotlinw()
 
         val extensions by kotlinw()
         val browser by kotlinw()
+    }
+
+    object Koin {
+        val core = "io.insert-koin:koin-core:${Versions.koinVersion}"
     }
 }
 

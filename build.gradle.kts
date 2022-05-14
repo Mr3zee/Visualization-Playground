@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib"))
     testImplementation(kotlin("test"))
 
     with(Dependencies.KotlinWrappers) {
@@ -17,10 +18,13 @@ dependencies {
         implementation(react)
         implementation(reactDom)
         implementation(emotion)
+        implementation(styledNext)
         implementation(reactRouterDom)
         implementation(extensions)
         implementation(browser)
     }
+
+    implementation(Dependencies.Koin.core)
 }
 
 kotlin {

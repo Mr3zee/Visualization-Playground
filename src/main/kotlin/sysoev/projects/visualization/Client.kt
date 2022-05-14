@@ -1,15 +1,30 @@
 package sysoev.projects.visualization
 
 import kotlinx.browser.document
+import org.koin.core.context.startKoin
+import react.FC
+import react.Props
 import react.create
 import react.dom.client.createRoot
+import sysoev.projects.visualization.components.SidePanel
+import sysoev.projects.visualization.base.pluginsModule
+import sysoev.projects.visualization.base.xChild
+import sysoev.projects.visualization.components.SideProps
 
 fun main() {
-    val container = document.getElementById("root") ?: error("Couldn't find root container!")
+    startKoin {
+        printLogger()
 
-    val root = createRoot(container)
-    val welcome = Welcome.create {
-        name = "Kotlin/JS"
+        modules(pluginsModule)
     }
-    root.render(welcome)
+
+    val container = document.getElementById("root") ?: error("Couldn't find root container!")
+    val root = createRoot(container)
+    root.render(App.create())
+}
+
+val App = FC<Props> {
+    xChild<SidePanel, SideProps> {
+        prop = "prop"
+    }
 }
