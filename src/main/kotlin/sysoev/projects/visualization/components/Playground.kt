@@ -11,7 +11,7 @@ import sysoev.projects.visualization.base.styled
 import sysoev.projects.visualization.base.xChild
 
 val Playground = FC<Props> {
-    val (sidePanelSize, sizeSetter) = useState(SidePanel.DEFAULT_SIZE)
+    val widthState = useState(SidePanel.DEFAULT_WIDTH)
 
     horizontal {
         css {
@@ -20,12 +20,14 @@ val Playground = FC<Props> {
         }
 
         xChild<SidePanel, SidePanelProps> {
-            panelWidth = sidePanelSize.px
+            panelWidth = widthState.component1().px
         }
 
         ResizeBar {
-            this.sizeSetter = sizeSetter
-            this.resizeBarType = ResizeBarType.VERTICAL
+            sizeState = widthState
+            resizeBarType = ResizeBarType.VERTICAL
+            maxWidth = SidePanel.MAX_WIDTH
+            minWidth = SidePanel.MIN_WIDTH
         }
 
         MainPanel.styled {

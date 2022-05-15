@@ -31,6 +31,8 @@ class SidePanel: CBComponent<SidePanelProps, State>(), KoinComponent {
     }
 
     companion object {
-        const val DEFAULT_SIZE = 240
+        const val DEFAULT_WIDTH = 360.0
+        const val MIN_WIDTH = 240.0
+        const val MAX_WIDTH = 600.0
     }
 }
