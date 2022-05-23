@@ -1,17 +1,15 @@
 package sysoev.projects.visualization.components
 
 import csstype.*
-import emotion.react.css
 import kotlinx.browser.document
 import kotlinx.js.jso
-import org.w3c.dom.events.Event
-import org.w3c.dom.events.MouseEvent
+import org.w3c.dom.events.*
 import react.FC
 import react.Props
 import react.StateInstance
 import react.dom.html.ReactHTML.div
 import react.useState
-import sysoev.projects.visualization.base.bounded
+import sysoev.projects.visualization.base.*
 
 enum class ResizeBarType {
     HORIZONTAL, VERTICAL
@@ -33,6 +31,8 @@ val ResizeBar = FC<ResizeBarProps> { props ->
     val maxWidth = props.maxWidth ?: Double.POSITIVE_INFINITY
     val minWidth = props.minWidth ?: 0.0
 
+    var background by useState(XTheme.primaryColor)
+
     div {
         css {
             when (props.resizeBarType) {
@@ -46,11 +46,10 @@ val ResizeBar = FC<ResizeBarProps> { props ->
                 }
             }
 
-            // TODO: 5/15/22 use theme colors
-            backgroundColor = NamedColor.gray
+            backgroundColor = background
 
             hover {
-                backgroundColor = NamedColor.blue
+                backgroundColor = XTheme.accentColor
             }
         }
 
@@ -61,6 +60,8 @@ val ResizeBar = FC<ResizeBarProps> { props ->
         }
 
         onMouseDown = { event ->
+            background = XTheme.accentColor
+
             val start = when (props.resizeBarType) {
                 ResizeBarType.VERTICAL -> event.pageX
                 ResizeBarType.HORIZONTAL -> event.pageY
@@ -79,6 +80,8 @@ val ResizeBar = FC<ResizeBarProps> { props ->
             }
 
             val onMouseUp: (Event) -> Unit = {
+                background = XTheme.primaryColor
+
                 document.body?.removeEventListener("mousemove", onMouseMove);
             }
 

@@ -1,14 +1,10 @@
 package sysoev.projects.visualization.components
 
-import csstype.number
-import csstype.pct
-import csstype.px
-import emotion.react.css
+import csstype.*
 import react.FC
 import react.Props
 import react.useState
-import sysoev.projects.visualization.base.styled
-import sysoev.projects.visualization.base.xChild
+import sysoev.projects.visualization.base.*
 
 val Playground = FC<Props> {
     val widthState = useState(SidePanel.DEFAULT_WIDTH)
@@ -17,11 +13,11 @@ val Playground = FC<Props> {
         css {
             height = 100.pct
             width = 100.pct
+
+            backgroundColor = XTheme.backgroundColor
         }
 
-        xChild<SidePanel, SidePanelProps> {
-            panelWidth = widthState.component1().px
-        }
+        xSidePanel(panelWidth = widthState.value.px)
 
         ResizeBar {
             sizeState = widthState
@@ -30,8 +26,6 @@ val Playground = FC<Props> {
             minWidth = SidePanel.MIN_WIDTH
         }
 
-        MainPanel.styled {
-            flexGrow = number(100.0)
-        }.invoke()
+        MainPanel()
     }
 }
