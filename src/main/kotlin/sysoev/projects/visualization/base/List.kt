@@ -9,7 +9,7 @@ import react.dom.html.ReactHTML.div
 
 external interface ListProps<T> : StyledProps {
     var items: List<T>
-    var renderItem: (ChildrenBuilder, T, DIVAttrs) -> Unit
+    var renderItem: (ChildrenBuilder, DIVAttrs, T) -> Unit
     var onClick: (T) -> Unit
     var builder: XBuilderInProps<ListProps<T>>
 }
@@ -36,7 +36,7 @@ class XList<T> : CBComponent<ListProps<T>>() {
                             width = 100.pct
                         }
 
-                        props.renderItem(this, item, this)
+                        props.renderItem(this, this, item)
                     }
 
                     onClick = { props.onClick(item) }
@@ -50,7 +50,7 @@ class XList<T> : CBComponent<ListProps<T>>() {
 
 fun <T> ChildrenBuilder.xList(
     items: List<T>,
-    renderItem: ChildrenBuilder.(T, DIVAttrs) -> Unit,
+    renderItem: ChildrenBuilder.(DIVAttrs, T) -> Unit,
     onClick: (T) -> Unit = {},
     builder: XBuilder<StyledProps> = {}
 ) {

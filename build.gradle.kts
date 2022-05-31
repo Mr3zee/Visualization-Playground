@@ -37,3 +37,9 @@ kotlin {
         }
     }
 }
+
+//tasks.withType<Kotlin2JsCompile>().configureEach {
+//    kotlinOptions {
+//        freeCompilerArgs = freeCompilerArgs + "-Xcontext-receivers"
+//    }
+//}

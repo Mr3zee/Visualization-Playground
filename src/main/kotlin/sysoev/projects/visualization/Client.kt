@@ -12,6 +12,7 @@ import react.FC
 import react.Props
 import react.create
 import react.dom.client.createRoot
+import sysoev.projects.visualization.base.applyCustomFonts
 import sysoev.projects.visualization.base.pluginsModule
 import sysoev.projects.visualization.components.Playground
 
@@ -43,6 +44,8 @@ val App = FC<Props> {
                 position = Position.fixed
                 overflow = Overflow.hidden
             }
+
+            applyCustomFonts()
         }
     }
 

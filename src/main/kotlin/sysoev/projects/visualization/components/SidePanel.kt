@@ -26,9 +26,9 @@ class SidePanel: CBComponent<SidePanelProps>(), KoinComponent {
 
             xList(
                 items = plugins,
-                renderItem = { item, attrs ->
+                renderItem = { attrs, item ->
                     attrs.css {
-                        color = XTheme.accentColor
+                        color = XTheme.sideTextColor
                     }
 
                     +"Plugin: ${item.name}"
