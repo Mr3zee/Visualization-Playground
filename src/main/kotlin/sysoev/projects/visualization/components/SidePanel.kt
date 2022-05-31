@@ -7,6 +7,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import react.*
 import sysoev.projects.visualization.base.*
+import sysoev.projects.visualization.plugins.Plugin
 
 external interface SidePanelProps: StyledProps {
     var panelWidth: Length
@@ -24,14 +25,14 @@ class SidePanel: CBComponent<SidePanelProps>(), KoinComponent {
                 backgroundColor = XTheme.secondaryColor
             }
 
-            xList(
-                items = plugins,
+            xSectionedList(
+                items = plugins.map { it to it.section },
                 renderItem = { attrs, item ->
                     attrs.css {
                         color = XTheme.sideTextColor
                     }
 
-                    +"Plugin: ${item.name}"
+                    +item.name.upperFirstChar()
                 },
                 onClick = { window.alert(it.name) }
             )

@@ -13,6 +13,7 @@ object XTheme: Theme {
     val secondaryBackgroundColor = xColor("F1FAEE")
     val backgroundColor = xColor("A8DADC")
     val secondaryColor = xColor("457B9D")
+    val secondaryColor2 = xColor("36A8D0")
     val primaryColor = xColor("1D3557")
 }
 

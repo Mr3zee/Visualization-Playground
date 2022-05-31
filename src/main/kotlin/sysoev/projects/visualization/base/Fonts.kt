@@ -3,14 +3,14 @@ package sysoev.projects.visualization.base
 import csstype.*
 
 object Fonts {
-    val PoppinsRegular = Font("Poppins/Poppins-Regular.woff2", "Poppins")
+    val PoppinsRegular = Font("Poppins/Poppins-Regular", "Poppins")
 }
 
 data class Font(
     val file: String,
     val family: String,
 ) {
-    val src get() = "url('fonts/$file') format('woff2')"
+    val src get() = "url('fonts/$file.woff2') format('woff2'), url('fonts/$file.ttf') format('ttf')"
 
     fun fontFamily() = string("'$family'")
 }
