@@ -2,16 +2,18 @@ package sysoev.projects.visualization.base
 
 import csstype.*
 import react.ChildrenBuilder
+import react.Context
+import react.Fragment
 import react.dom.html.ReactHTML.div
 
-external interface ListProps<T> : StyledProps {
+private external interface ListProps<T> : StyledProps {
     var items: List<SectionedElement<T>>
     var renderItem: (ChildrenBuilder, DIVAttrs, T) -> Unit
     var onClick: (T) -> Unit
     var builder: XBuilderInProps<ListProps<T>>
 }
 
-class XList<T> : CBComponent<ListProps<T>>() {
+private class XList<T> : CBComponent<ListProps<T>>() {
     override fun ChildrenBuilder.build() {
         vertical {
             css {
@@ -21,26 +23,28 @@ class XList<T> : CBComponent<ListProps<T>>() {
             props.items.forEachIndexed { i, item ->
                 when (item) {
                     is SectionedElement.Element -> {
-                        flex {
-                            css {
-                                width = 100.pct - 16.px
-                                minHeight = 32.px
-                                padding = 8.px
-
-                                alignItems = AlignItems.center
-                            }
-
-                            div {
+                        Fragment {
+                            flex {
                                 css {
-                                    width = 100.pct
+                                    width = 100.pct - 16.px
+                                    minHeight = 32.px
+                                    padding = 8.px
 
-                                    fontSize = FontSize.medium
+                                    alignItems = AlignItems.center
                                 }
 
-                                props.renderItem(this, this, item.value)
-                            }
+                                div {
+                                    css {
+                                        width = 100.pct
 
-                            onClick = { props.onClick(item.value) }
+                                        fontSize = FontSize.medium
+                                    }
+
+                                    props.renderItem(this, this, item.value)
+                                }
+
+                                onClick = { props.onClick(item.value) }
+                            }
                         }
                     }
                     is SectionedElement.Section -> {
@@ -120,7 +124,7 @@ fun <T> ChildrenBuilder.xList(
     builder = builder.builderInProps()
 )
 
-sealed interface SectionedElement<T> {
+private sealed interface SectionedElement<T> {
     class Element<T>(val value: T): SectionedElement<T>
 
     class Section<T>(val section: String?): SectionedElement<T>

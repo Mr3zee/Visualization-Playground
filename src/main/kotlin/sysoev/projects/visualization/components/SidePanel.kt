@@ -2,7 +2,6 @@ package sysoev.projects.visualization.components
 
 import csstype.Length
 import csstype.pct
-import kotlinx.browser.window
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import react.*
@@ -17,6 +16,8 @@ class SidePanel: CBComponent<SidePanelProps>(), KoinComponent {
     private val plugins: List<Plugin> by inject(qualifier = pluginsQualifier)
 
     override fun ChildrenBuilder.build() {
+        val pluginSetter = useContext(pluginContextSetter)
+
         vertical {
             css {
                 width = props.panelWidth
@@ -34,7 +35,7 @@ class SidePanel: CBComponent<SidePanelProps>(), KoinComponent {
 
                     +item.name.upperFirstChar()
                 },
-                onClick = { window.alert(it.name) }
+                onClick = { pluginSetter(it) }
             )
         }
     }

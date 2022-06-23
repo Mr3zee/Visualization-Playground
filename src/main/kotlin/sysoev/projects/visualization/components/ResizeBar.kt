@@ -4,11 +4,8 @@ import csstype.*
 import kotlinx.browser.document
 import kotlinx.js.jso
 import org.w3c.dom.events.*
-import react.FC
-import react.Props
-import react.StateInstance
+import react.*
 import react.dom.html.ReactHTML.div
-import react.useState
 import sysoev.projects.visualization.base.*
 
 enum class ResizeBarType {
@@ -25,7 +22,7 @@ external interface ResizeBarProps : Props {
 
 private const val RESIZE_BAR_WIDTH = 8
 
-val ResizeBar = FC<ResizeBarProps> { props ->
+val ResizeBar = memo(FC<ResizeBarProps> { props ->
     val defaultSize by useState(props.defaultSize ?: props.sizeState.component1())
     val (size, setSize) = props.sizeState
     val maxWidth = props.maxWidth ?: Double.POSITIVE_INFINITY
@@ -89,4 +86,4 @@ val ResizeBar = FC<ResizeBarProps> { props ->
             document.body?.addEventListener("mouseup", onMouseUp, jso { once = true })
         }
     }
-}
+})

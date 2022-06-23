@@ -38,7 +38,7 @@ inline fun <reified C : CBComponent<StyledProps>> ChildrenBuilder.xChild() {
 }
 
 abstract class CBComponent<P : StyledProps> : RComponent<P, State>() {
-    private val innerComponent = FC<P> { build() }
+    private val innerComponent = memo(FC<P> { build() })
 
     override fun RBuilder.render() {
         child(innerComponent.create())
