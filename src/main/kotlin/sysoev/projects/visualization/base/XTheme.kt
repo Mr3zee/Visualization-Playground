@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package sysoev.projects.visualization.base
 
 import csstype.Color

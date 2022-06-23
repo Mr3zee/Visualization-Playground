@@ -7,4 +7,4 @@ import react.dom.html.ReactHTML.div
 fun ChildrenBuilder.gap(size: Length) = div.styled {
     width = size
     height = size
-}
+}.invoke()

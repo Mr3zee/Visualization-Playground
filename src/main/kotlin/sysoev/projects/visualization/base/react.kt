@@ -33,10 +33,6 @@ inline fun <reified C : CBComponent<P>, P> ChildrenBuilder.xChild(
     }
 }
 
-inline fun <reified C : CBComponent<StyledProps>> ChildrenBuilder.xChild() {
-    C::class.react.invoke()
-}
-
 abstract class CBComponent<P : StyledProps> : RComponent<P, State>() {
     private val innerComponent = memo(FC<P> { build() })
 

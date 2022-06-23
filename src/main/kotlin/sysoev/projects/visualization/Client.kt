@@ -12,7 +12,6 @@ import react.FC
 import react.Props
 import react.create
 import react.dom.client.createRoot
-import react.useMemo
 import sysoev.projects.visualization.base.applyCustomFonts
 import sysoev.projects.visualization.base.pluginsModule
 import sysoev.projects.visualization.components.Playground
@@ -27,7 +26,7 @@ fun main() {
         modules(pluginsModule)
     }
 
-    val container = document.getElementById(root) ?: error("Couldn't find root container!")
+    val container = document.getElementById(root) ?: error("Couldn't find root container")
     val root = createRoot(container)
     root.render(App.create())
 }
