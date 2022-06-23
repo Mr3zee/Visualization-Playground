@@ -1,3 +1,3 @@
 rootProject.name = "visualization-playground"
 
-include(":kotlin-p5")
+include(":kotlin-p5-lib")
