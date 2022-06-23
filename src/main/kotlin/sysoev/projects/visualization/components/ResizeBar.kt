@@ -13,9 +13,9 @@ enum class ResizeBarType {
 }
 
 external interface ResizeBarProps : Props {
-    var sizeState: StateInstance<Double>
+    var sizeSetter: (Double) -> Unit
     var resizeBarType: ResizeBarType
-    var defaultSize: Double?
+    var initialSize: Double
     var maxWidth: Double?
     var minWidth: Double?
 }
@@ -23,8 +23,10 @@ external interface ResizeBarProps : Props {
 private const val RESIZE_BAR_WIDTH = 8
 
 val ResizeBar = memo(FC<ResizeBarProps> { props ->
-    val defaultSize by useState(props.defaultSize ?: props.sizeState.component1())
-    val (size, setSize) = props.sizeState
+    val (size, setSize) = useState(props.initialSize)
+
+    useEffect { props.sizeSetter(size) }
+
     val maxWidth = props.maxWidth ?: Double.POSITIVE_INFINITY
     val minWidth = props.minWidth ?: 0.0
 
@@ -52,7 +54,7 @@ val ResizeBar = memo(FC<ResizeBarProps> { props ->
 
         onClick = {
             if (it.altKey) {
-                setSize { defaultSize }
+                setSize { props.initialSize }
             }
         }
 
@@ -79,7 +81,7 @@ val ResizeBar = memo(FC<ResizeBarProps> { props ->
             val onMouseUp: (Event) -> Unit = {
                 background = XTheme.primaryColor
 
-                document.body?.removeEventListener("mousemove", onMouseMove);
+                document.body?.removeEventListener("mousemove", onMouseMove)
             }
 
             document.body?.addEventListener("mousemove", onMouseMove)

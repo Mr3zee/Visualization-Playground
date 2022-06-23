@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "1.6.20"
+    kotlin("js") version "1.6.21"
 }
 
 group = "sysoev.projects"
@@ -35,6 +35,12 @@ kotlin {
                 cssSupport.enabled = true
             }
         }
+    }
+}
+
+afterEvaluate {
+    rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension> {
+        versions.webpackCli.version="4.10.0"
     }
 }
 

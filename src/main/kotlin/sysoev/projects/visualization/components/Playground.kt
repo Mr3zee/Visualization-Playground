@@ -5,8 +5,6 @@ import react.*
 import sysoev.projects.visualization.base.*
 
 val Playground = FC<Props> {
-    val widthState = useState(SidePanel.DEFAULT_WIDTH)
-
     PluginContextProvider {
         horizontal {
             css {
@@ -16,14 +14,7 @@ val Playground = FC<Props> {
                 backgroundColor = XTheme.backgroundColor
             }
 
-            xSidePanel(panelWidth = widthState.value.px)
-
-            ResizeBar {
-                sizeState = widthState
-                resizeBarType = ResizeBarType.VERTICAL
-                maxWidth = SidePanel.MAX_WIDTH
-                minWidth = SidePanel.MIN_WIDTH
-            }
+            xSidePanel()
 
             MainPanel()
         }

@@ -1,30 +1,31 @@
 package sysoev.projects.visualization.components
 
-import csstype.Length
 import csstype.pct
+import csstype.px
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.w3c.dom.HTMLElement
 import react.*
 import sysoev.projects.visualization.base.*
 import sysoev.projects.visualization.plugins.Plugin
 
-external interface SidePanelProps: StyledProps {
-    var panelWidth: Length
-}
-
-class SidePanel: CBComponent<SidePanelProps>(), KoinComponent {
+class SidePanel: CBComponent<StyledProps>(), KoinComponent {
     private val plugins: List<Plugin> by inject(qualifier = pluginsQualifier)
 
     override fun ChildrenBuilder.build() {
         val pluginSetter = useContext(pluginContextSetter)
 
+        val panelRef = useRef<HTMLElement>(null)
+
         vertical {
             css {
-                width = props.panelWidth
+                width = DEFAULT_WIDTH.px
                 height = 100.pct
 
                 backgroundColor = XTheme.secondaryColor
             }
+
+            ref = panelRef
 
             xSectionedList(
                 items = plugins.map { it to it.section },
@@ -38,6 +39,16 @@ class SidePanel: CBComponent<SidePanelProps>(), KoinComponent {
                 onClick = { pluginSetter(it) }
             )
         }
+
+        ResizeBar {
+            sizeSetter = {
+                panelRef.current?.style?.width = it.px.toString()
+            }
+            initialSize = DEFAULT_WIDTH
+            resizeBarType = ResizeBarType.VERTICAL
+            maxWidth = MAX_WIDTH
+            minWidth = MIN_WIDTH
+        }
     }
 
     companion object {
@@ -47,8 +58,6 @@ class SidePanel: CBComponent<SidePanelProps>(), KoinComponent {
     }
 }
 
-fun ChildrenBuilder.xSidePanel(panelWidth: Length) {
-    xChild<SidePanel, SidePanelProps> {
-        this.panelWidth = panelWidth
-    }
+fun ChildrenBuilder.xSidePanel() {
+    xChild<SidePanel, StyledProps>()
 }

@@ -5,3 +5,8 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+tasks.compileKotlin {
+    sourceCompatibility = "11"
+    targetCompatibility = "11"
+}
