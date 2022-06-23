@@ -1,12 +1,5 @@
 package sysoev.projects.visualization.plugins
 
-import react.RBuilder
-
-class SamplePlugin2: Plugin {
-    override fun RBuilder.render() {
-        TODO("Not yet implemented")
-    }
-
+class SamplePlugin2: BasePlugin() {
     override val name = "sample 2"
-    override val section = null
 }
