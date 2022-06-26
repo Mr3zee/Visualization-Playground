@@ -1,3 +1,11 @@
+/**
+ * @file The structure.kt module is best thought of as a collection of ways to make modifications
+ * to the typical loop structure exposed by the draw() function.
+ * The functions in this module allow you to add and extract individual renders from the loop,
+ * draw the loop one frame at a time, pause and resume the loop, and so on.
+ *
+ * @see <a href="https://github.com/processing/p5.js/blob/main/src/core/constants.js">source</a>
+ */
 @file:Suppress("unused")
 
 package p5.core

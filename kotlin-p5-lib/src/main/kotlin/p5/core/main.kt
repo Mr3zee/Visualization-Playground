@@ -1,3 +1,18 @@
+/**
+ * @file The sole job of the main.js module is to create and then export the constructor
+ * function for creating a new p5 object.
+ * This constructor function is also called p5, and doesn't use the typical JavaScript
+ * convention of capitalizing constructor functions.
+ * The constructor handles a number of mechanical startup concerns, including
+ * assigning functions and properties from elsewhere in the source code to the newly
+ * created p5 object as either public or private methods and properties.
+ *
+ * Aside from the exported constructor function, the most important thing in this module
+ * is the set of functions that define the loop used by nearly every p5.js project:
+ * preload(), setup(), draw(), remove(), and so on.
+ *
+ * @ see <a href="https://github.com/processing/p5.js/blob/main/src/core/main.js">source</a>
+ */
 @file:Suppress("ClassName", "unused")
 
 package p5.core
