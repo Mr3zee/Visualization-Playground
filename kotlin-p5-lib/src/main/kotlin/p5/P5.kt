@@ -2,6 +2,7 @@ package p5
 
 import kotlinx.browser.document
 import org.w3c.dom.HTMLElement
+import p5.core.noLoop
 import p5.core.p5
 
 fun main() {
@@ -18,6 +19,7 @@ fun main() {
 
         it.draw = {
             console.log("draw")
+            it.noLoop()
         }
     }, container)
 }
