@@ -259,6 +259,25 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
     }
 
     /**
+     * Thin wrapper around a renderer, to be used for creating a
+     * graphics buffer object. Use this class if you need
+     * to draw into an off-screen graphics buffer. The two parameters define the
+     * width and height in pixels. The fields and methods for this class are
+     * extensive, but mirror the normal drawing API for p5.
+     *
+     * @class p5.Graphics
+     * @constructor
+     * @extends p5.Element
+     * @param {Number} [w]            width
+     * @param {Number} [h]            height
+     * @param {Constant} [renderer]   the renderer to use, either P2D or WEBGL
+     * @param {p5} [pInst]            pointer to p5 instance
+     */
+    class Graphics(w: Int, h: Int, renderer: String, pInst: p5): Element {
+        val canvas: HTMLCanvasElement
+    }
+
+    /**
      * Creates a new <a href="#/p5.Image">p5.Image</a>. A <a href="#/p5.Image">p5.Image</a> is a canvas backed representation of an
      * image.
      *
