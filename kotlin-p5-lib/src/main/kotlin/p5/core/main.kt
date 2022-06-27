@@ -17,6 +17,8 @@
 
 package p5.core
 
+import org.w3c.dom.CanvasRenderingContext2D
+import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLElement
 
 @JsModule("p5")
@@ -213,7 +215,7 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      * @param {HTMLElement} [elt] DOM node that is wrapped
      * @param {p5} [pInst] pointer to p5 instance
     */
-    class Element(elt: HTMLElement, pInst: p5) {
+    open class Element(elt: HTMLElement, pInst: p5) {
         /**
          * Underlying HTML element. All normal HTML methods can be called on this.
          * @example
@@ -238,5 +240,245 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
         val width: Int
 
         val height: Int
+    }
+
+    /**
+     * Main graphics and rendering context, as well as the base API
+     * implementation for p5.js "core". To be used as the superclass for
+     * Renderer2D and Renderer3D classes, respectively.
+     *
+     * @class p5.Renderer
+     * @constructor
+     * @extends p5.Element
+     * @param {String} [elt] DOM node that is wrapped
+     * @param {p5} [pInst] pointer to p5 instance
+     * @param {Boolean} [isMainCanvas] whether we're using it as main canvas
+     */
+    class Renderer(elt: HTMLElement, pInst: p5, isMainCanvas: Boolean): Element {
+        val canvas: HTMLElement
+    }
+
+    /**
+     * Creates a new <a href="#/p5.Image">p5.Image</a>. A <a href="#/p5.Image">p5.Image</a> is a canvas backed representation of an
+     * image.
+     *
+     * p5 can display .gif, .jpg and .png images. Images may be displayed
+     * in 2D and 3D space. Before an image is used, it must be loaded with the
+     * <a href="#/p5/loadImage">loadImage()</a> function. The <a href="#/p5.Image">p5.Image</a> class contains fields for the width and
+     * height of the image, as well as an array called <a href="#/p5.Image/pixels">pixels[]</a> that contains the
+     * values for every pixel in the image.
+     *
+     * The methods described below allow easy access to the image's pixels and
+     * alpha channel and simplify the process of compositing.
+     *
+     * Before using the <a href="#/p5.Image/pixels">pixels[]</a> array, be sure to use the <a href="#/p5.Image/loadPixels">loadPixels()</a> method on
+     * the image to make sure that the pixel data is properly loaded.
+     * @example
+     * <div><code>
+     * function setup() {
+     *   let img = createImage(100, 100); // same as new p5.Image(100, 100);
+     *   img.loadPixels();
+     *   createCanvas(100, 100);
+     *   background(0);
+     *
+     *   // helper for writing color to array
+     *   function writeColor(image, x, y, red, green, blue, alpha) {
+     *     let index = (x + y * width) * 4;
+     *     image.pixels[index] = red;
+     *     image.pixels[index + 1] = green;
+     *     image.pixels[index + 2] = blue;
+     *     image.pixels[index + 3] = alpha;
+     *   }
+     *
+     *   let x, y;
+     *   // fill with random colors
+     *   for (y = 0; y < img.height; y++) {
+     *     for (x = 0; x < img.width; x++) {
+     *       let red = random(255);
+     *       let green = random(255);
+     *       let blue = random(255);
+     *       let alpha = 255;
+     *       writeColor(img, x, y, red, green, blue, alpha);
+     *     }
+     *   }
+     *
+     *   // draw a red line
+     *   y = 0;
+     *   for (x = 0; x < img.width; x++) {
+     *     writeColor(img, x, y, 255, 0, 0, 255);
+     *   }
+     *
+     *   // draw a green line
+     *   y = img.height - 1;
+     *   for (x = 0; x < img.width; x++) {
+     *     writeColor(img, x, y, 0, 255, 0, 255);
+     *   }
+     *
+     *   img.updatePixels();
+     *   image(img, 0, 0);
+     * }
+     * </code></div>
+     *
+     * @class p5.Image
+     * @constructor
+     * @param {Number} width
+     * @param {Number} height
+     */
+    class Image(width: Int, height: Int) {
+        /**
+         * Image width.
+         * @property {Number} width
+         * @readOnly
+         * @example
+         * <div><code>
+         * let img;
+         * function preload() {
+         *   img = loadImage('assets/rockies.jpg');
+         * }
+         *
+         * function setup() {
+         *   createCanvas(100, 100);
+         *   image(img, 0, 0);
+         *   for (let i = 0; i < img.width; i++) {
+         *     let c = img.get(i, img.height / 2);
+         *     stroke(c);
+         *     line(i, height / 2, i, height);
+         *   }
+         * }
+         * </code></div>
+         *
+         * @alt
+         * rocky mountains in top and horizontal lines in corresponding colors in bottom.
+         *
+         */
+        val width: Int
+
+        /**
+         * Image height.
+         * @property {Number} height
+         * @readOnly
+         * @example
+         * <div><code>
+         * let img;
+         * function preload() {
+         *   img = loadImage('assets/rockies.jpg');
+         * }
+         *
+         * function setup() {
+         *   createCanvas(100, 100);
+         *   image(img, 0, 0);
+         *   for (let i = 0; i < img.height; i++) {
+         *     let c = img.get(img.width / 2, i);
+         *     stroke(c);
+         *     line(0, i, width / 2, i);
+         *   }
+         * }
+         * </code></div>
+         *
+         * @alt
+         * rocky mountains on right and vertical lines in corresponding colors on left.
+         *
+         */
+        val height: Int
+
+        val canvas: HTMLCanvasElement
+
+        val drawingContext: CanvasRenderingContext2D?
+
+        //Object for working with GIFs, defaults to null
+        val gifProperties: dynamic
+
+        /**
+         * Array containing the values for all the pixels in the display window.
+         * These values are numbers. This array is the size (include an appropriate
+         * factor for pixelDensity) of the display window x4,
+         * representing the R, G, B, A values in order for each pixel, moving from
+         * left to right across each row, then down each column. Retina and other
+         * high density displays may have more pixels (by a factor of
+         * pixelDensity^2).
+         * For example, if the image is 100×100 pixels, there will be 40,000. With
+         * pixelDensity = 2, there will be 160,000. The first four values
+         * (indices 0-3) in the array will be the R, G, B, A values of the pixel at
+         * (0, 0). The second four values (indices 4-7) will contain the R, G, B, A
+         * values of the pixel at (1, 0). More generally, to set values for a pixel
+         * at (x, y):
+         * ```javascript
+         * let d = pixelDensity();
+         * for (let i = 0; i < d; i++) {
+         *   for (let j = 0; j < d; j++) {
+         *     // loop over
+         *     index = 4 * ((y * d + j) * width * d + (x * d + i));
+         *     pixels[index] = r;
+         *     pixels[index+1] = g;
+         *     pixels[index+2] = b;
+         *     pixels[index+3] = a;
+         *   }
+         * }
+         * ```
+         *
+         * Before accessing this array, the data must loaded with the <a href="#/p5.Image/loadPixels">loadPixels()</a>
+         * function. After the array data has been modified, the <a href="#/p5.Image/updatePixels">updatePixels()</a>
+         * function must be run to update the changes.
+         * @property {Number[]} pixels
+         * @example
+         * <div>
+         * <code>
+         * let img = createImage(66, 66);
+         * img.loadPixels();
+         * for (let i = 0; i < img.width; i++) {
+         *   for (let j = 0; j < img.height; j++) {
+         *     img.set(i, j, color(0, 90, 102));
+         *   }
+         * }
+         * img.updatePixels();
+         * image(img, 17, 17);
+         * </code>
+         * </div>
+         * <div>
+         * <code>
+         * let pink = color(255, 102, 204);
+         * let img = createImage(66, 66);
+         * img.loadPixels();
+         * for (let i = 0; i < 4 * (width * height / 2); i += 4) {
+         *   img.pixels[i] = red(pink);
+         *   img.pixels[i + 1] = green(pink);
+         *   img.pixels[i + 2] = blue(pink);
+         *   img.pixels[i + 3] = alpha(pink);
+         * }
+         * img.updatePixels();
+         * image(img, 17, 17);
+         * </code>
+         * </div>
+         *
+         * @alt
+         * 66×66 turquoise rect in center of canvas
+         * 66×66 pink rect in center of canvas
+         *
+         */
+        val pixels: Array<Array<Int>>
+    }
+
+
+    /**
+     * Each color stores the color mode and level maxes that were applied at the
+     * time of its construction. These are used to interpret the input arguments
+     * (at construction and later for that instance of color) and to format the
+     * output e.g. when <a href="#/p5/saturation">saturation()</a> is requested.
+     *
+     * Internally, we store an array representing the ideal RGBA values in floating
+     * point form, normalized from 0 to 1. From this we calculate the closest
+     * screen color (RGBA levels from 0 to 255) and expose this to the renderer.
+     *
+     * We also cache normalized, floating-point components of the color in various
+     * representations as they are calculated. This is done to prevent repeating a
+     * conversion that has already been performed.
+     *
+     * @class p5.Color
+     * @constructor
+     */
+    class Color(pInst: p5, vals: Array<Int>) {
+        constructor(pInst: p5, vals: String)
+
+        val mode: String
     }
 }
