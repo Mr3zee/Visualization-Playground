@@ -13,7 +13,7 @@
  *
  * @ see <a href="https://github.com/processing/p5.js/blob/main/src/core/main.js">source</a>
  */
-@file:Suppress("ClassName", "unused")
+@file:Suppress("ClassName", "unused", "MemberVisibilityCanBePrivate", "KDocUnresolvedReference")
 
 package p5.core
 
@@ -67,7 +67,7 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      * The <a href="#/p5/setup">setup()</a> function is called once when the program starts. It's used to
      * define initial environment properties such as screen size and background
      * color and to load media such as images and fonts as the program starts.
-     * There can only be one <a href="#/p5/setup">setup()</a> function for each program and it shouldn't
+     * There can only be one <a href="#/p5/setup">setup()</a> function for each program, and it shouldn't
      * be called again after its initial execution.
      *
      * Note: Variables declared within <a href="#/p5/setup">setup()</a> are not accessible within other
@@ -201,4 +201,42 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      *
      */
     var disableFriendlyErrors: Boolean = definedExternally
+
+    /**
+     * Base class for all elements added to a sketch, including canvas,
+     * graphics buffers, and other HTML elements. It is not called directly, but <a href="#/p5.Element">p5.Element</a>
+     * objects are created by calling <a href="#/p5/createCanvas">createCanvas()</a>, <a href="#/p5/createGraphics">createGraphics()</a>,
+     * <a href="#/p5/createDiv">createDiv()</a>, <a href="#/p5/createImg">createImg()</a>, <a href="#/p5/createInput">createInput()</a>, etc.
+     *
+     * @class p5.Element
+     * @constructor
+     * @param {HTMLElement} [elt] DOM node that is wrapped
+     * @param {p5} [pInst] pointer to p5 instance
+    */
+    class Element(elt: HTMLElement, pInst: p5) {
+        /**
+         * Underlying HTML element. All normal HTML methods can be called on this.
+         * @example
+         * <div>
+         * <code>
+         * function setup() {
+         *   let c = createCanvas(50, 50);
+         *   c.elt.style.border = '5px solid red';
+         * }
+         *
+         * function draw() {
+         *   background(220);
+         * }
+         * </code>
+         * </div>
+         *
+         * @property elt
+         * @readOnly
+         */
+        val elt: HTMLElement
+
+        val width: Int
+
+        val height: Int
+    }
 }
