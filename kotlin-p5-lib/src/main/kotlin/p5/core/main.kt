@@ -518,4 +518,71 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
 
         val mode: String
     }
+
+    /**
+    * A class to describe a two or three-dimensional vector, specifically
+    * a Euclidean (also known as geometric) vector. A vector is an entity
+    * that has both magnitude and direction. The datatype, however, stores
+    * the components of the vector (`x`, `y` for 2D; or `x`, `y`, `z` for 3D). The magnitude
+    * and direction can be accessed via the methods <a href="#/p5.Vector/mag">p5.Vector.mag()</a> and <a href="#/p5.Vector/heading">heading()</a>.
+    *
+    * In many of the p5.js examples, you will see <a href="#/p5.Vector">p5.Vector</a> used to describe a
+    * position, velocity, or acceleration. For example, if you consider a rectangle
+    * moving across the screen, at any given instant it has a position (a vector
+    * that points from the origin to its location), a velocity (the rate at which
+    * the object's position changes per time unit, expressed as a vector), and
+    * acceleration (the rate at which the object's velocity changes per time
+    * unit, expressed as a vector).
+    *
+    * Since vectors represent groupings of values, we cannot simply use
+    * traditional addition/multiplication/etc. Instead, we'll need to do some
+    * "vector" math, which is made easy by the methods inside the <a href="#/p5.Vector">p5.Vector</a> class.
+    *
+    * @class p5.Vector
+    * @constructor
+    * @param {Number} [x] x component of the vector
+    * @param {Number} [y] y component of the vector
+    * @param {Number} [z] z component of the vector
+    * @example
+    * <div>
+    * <code>
+    * let v1 = createVector(40, 50);
+    * let v2 = createVector(40, 50);
+    *
+    * ellipse(v1.x, v1.y, 50, 50);
+    * ellipse(v2.x, v2.y, 50, 50);
+    * v1.add(v2);
+    * ellipse(v1.x, v1.y, 50, 50);
+    *
+    * describe(`2 white ellipses. One center-left the other
+    *   bottom right and off canvas`);
+    * </code>
+    * </div>
+    */
+    class Vector(x: Double, y: Double, z: Double) {
+        constructor(x: Double, y: Double)
+
+        constructor(x: Double)
+
+        constructor()
+
+        /**
+         * The x component of the vector
+         * @property x {Number}
+         */
+        val x: Double
+        /**
+         * The y component of the vector
+         * @property y {Number}
+         */
+        val y: Double
+        /**
+         * The z component of the vector
+         * @property z {Number}
+         */
+        val z: Double
+
+        companion object
+    }
+
 }
