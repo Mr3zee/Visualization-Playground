@@ -86,8 +86,12 @@ inline fun p5.Image.loadPixels() { asDynamic().loadPixels() }
 /**
  * @method updatePixels
  */
-inline fun p5.Image.updatePixels(x: Int? = null, y: Int? = null, w: Int? = null, h: Int? = null) {
-    asDynamic().updatePixels(x ?: undefined, y ?: undefined, w ?: undefined, h ?: undefined)
+inline fun p5.Image.updatePixels(x: Int, y: Int, w: Int, h: Int) {
+    asDynamic().updatePixels(x, y, w, h)
+}
+
+inline fun p5.Image.updatePixels() {
+    asDynamic().updatePixels()
 }
 
 /**

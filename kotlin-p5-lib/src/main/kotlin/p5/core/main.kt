@@ -259,6 +259,15 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
     }
 
     /**
+     * p5.Renderer2D
+     * The 2D graphics canvas renderer class.
+     * extends p5.Renderer
+     */
+    class Renderer2D(elt: HTMLElement, pInst: p5, isMainCanvas: Boolean) : Element {
+        val drawingContext: CanvasRenderingContext2D?
+    }
+
+    /**
      * Thin wrapper around a renderer, to be used for creating a
      * graphics buffer object. Use this class if you need
      * to draw into an off-screen graphics buffer. The two parameters define the
@@ -497,6 +506,15 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      */
     class Color(pInst: p5, vals: Array<Int>) {
         constructor(pInst: p5, vals: String)
+
+        constructor(r: Int, g: Int, b: Int, a: Int)
+
+        constructor(r: Int, g: Int, b: Int)
+
+        constructor(grayscale: Int, a: Int)
+
+        constructor(grayscale: Int)
+
 
         val mode: String
     }

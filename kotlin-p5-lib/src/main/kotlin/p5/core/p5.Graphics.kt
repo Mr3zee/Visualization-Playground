@@ -1,3 +1,8 @@
+/**
+ * @file The p5.Graphics module is a lightweight wrapper around renderers which is used to
+ * create output graphics in memory without ever actually drawing them on the screen.
+ */
+
 @file:Suppress("unused")
 
 package p5.core
