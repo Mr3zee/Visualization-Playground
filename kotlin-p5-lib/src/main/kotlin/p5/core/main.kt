@@ -585,4 +585,5 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
         companion object
     }
 
+    companion object
 }

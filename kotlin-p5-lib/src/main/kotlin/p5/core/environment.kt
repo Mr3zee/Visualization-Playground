@@ -469,13 +469,7 @@ inline fun p5.fullscreen(): Boolean = asDynamic().fullscreen() as Boolean
  * fuzzy 50×50 white ellipse with black outline in center of canvas.
  * sharp 50×50 white ellipse with black outline in center of canvas.
  */
-/**
- * @method pixelDensity
- * @returns {Number} current pixel density of the sketch
- */
-inline fun p5.pixelDensity(`val`: Int) {
-    asDynamic().pixelDensity(`val`)
-}
+inline fun p5.pixelDensity(`val`: Int) { asDynamic().pixelDensity(`val`) }
 
 inline fun p5.pixelDensity(): Int = asDynamic().pixelDensity() as Int
 

@@ -64,9 +64,9 @@ import org.w3c.dom.HTMLElement
  * @method parent
  * @return {HTMLElement}
  */
-fun p5.Element.parent(p: p5.Element): HTMLElement? = asDynamic().parent(p) as HTMLElement?
+fun p5.Element.parent(p: p5.Element) { asDynamic().parent(p) }
 
-fun p5.Element.parent(p: String): HTMLElement? = asDynamic().parent(p) as HTMLElement?
+fun p5.Element.parent(p: String) { asDynamic().parent(p) }
 
 fun p5.Element.parent(): HTMLElement? = asDynamic().parent() as HTMLElement?
 
