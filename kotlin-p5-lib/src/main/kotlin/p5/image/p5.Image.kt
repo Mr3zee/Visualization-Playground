@@ -349,7 +349,7 @@ inline fun p5.Image.mask(p5Image: p5.Image) { asDynamic().mask(p5Image) }
  * of the effects present in the filter examples.
  *
  * @method filter
- * @param  {Constant} filterType  either THRESHOLD, GRAY, OPAQUE, INVERT,
+ * @param  {Constant} [filterType]  either THRESHOLD, GRAY, OPAQUE, INVERT,
  *                                POSTERIZE, ERODE, DILATE or BLUR.
  *                                See Filters.js for docs on
  *                                each available filter
@@ -375,8 +375,8 @@ inline fun p5.Image.mask(p5Image: p5.Image) { asDynamic().mask(p5Image) }
  * @alt
  * 2 images of rocky mountains left one in color, right in black and white
  */
-inline fun p5.Image.filter(operation: String, value: Int? = null) {
-    asDynamic().filter(operation, value ?: undefined)
+inline fun p5.Image.filter(filterType: String, filterParam: Int? = null) {
+    asDynamic().filter(filterType, filterParam ?: undefined)
 }
 
 /**
