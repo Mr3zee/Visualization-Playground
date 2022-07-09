@@ -28,7 +28,6 @@ val p5.VERSION: String get() = asDynamic().VERSION as String
  * @property {String} P2D
  * @final
  */
-//    @JsName("P2D")
 val p5.P2D: String get() = asDynamic().P2D as String
 
 /**

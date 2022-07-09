@@ -32,11 +32,11 @@ inline fun p5.Renderer2D.background(grayscale: Int, a: Int? = null) {
 
 inline fun p5.Renderer2D.background(color: Array<Int>) { asDynamic().background(color) }
 
-inline fun p5.Renderer2D.background(color: String) { asDynamic().background(color) }
+inline fun p5.Renderer2D.background(color: String, a: Int? = null) { asDynamic().background(color, a) }
 
 inline fun p5.Renderer2D.background(color: p5.Color) { asDynamic().background(color) }
 
-inline fun p5.Renderer2D.background(image: p5.Image) { asDynamic().background(image) }
+inline fun p5.Renderer2D.background(image: p5.Image, a: Int? = null) { asDynamic().background(image, a) }
 
 
 /**
