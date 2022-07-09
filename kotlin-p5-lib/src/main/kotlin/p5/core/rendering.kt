@@ -15,7 +15,7 @@ package p5.core
  * Calling <a href="#/p5/createCanvas">createCanvas</a> more than once in a
  * sketch will result in very unpredictable behavior. If you want more than
  * one drawing canvas you could use <a href="#/p5/createGraphics">createGraphics()</a>
- * (hidden by default but it can be shown).
+ * (hidden by default, but it can be shown).
  *
  * Important note: in 2D mode (i.e. when `p5.Renderer` is not set) the origin (0,0)
  * is positioned at the top left of the screen. In 3D mode (i.e. when `p5.Renderer`
@@ -49,7 +49,7 @@ package p5.core
  * @alt
  * Black line extending from top-left of canvas to bottom right.
  */
-inline fun p5.createCanvas(w: Int, h: Int, renderer: String): p5.Renderer = asDynamic().createCanvas(w, h, renderer) as p5.Renderer
+inline fun p5.createCanvas(w: Int, h: Int, renderer: String? = undefined): p5.Renderer = asDynamic().createCanvas(w, h, renderer) as p5.Renderer
 
 
 /**
