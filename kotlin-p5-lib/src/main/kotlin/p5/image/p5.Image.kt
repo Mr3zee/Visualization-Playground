@@ -375,8 +375,8 @@ inline fun p5.Image.mask(p5Image: p5.Image) { asDynamic().mask(p5Image) }
  * @alt
  * 2 images of rocky mountains left one in color, right in black and white
  */
-inline fun p5.Image.filter(filterType: String, filterParam: Int? = null) {
-    asDynamic().filter(filterType, filterParam ?: undefined)
+inline fun p5.Image.filter(filterType: String, filterParam: dynamic = undefined) {
+    asDynamic().filter(filterType, filterParam)
 }
 
 /**

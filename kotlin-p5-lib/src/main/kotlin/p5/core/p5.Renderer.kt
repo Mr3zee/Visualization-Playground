@@ -30,6 +30,8 @@ inline fun p5.Renderer.get(x: Int, y: Int): Array<Int> = asDynamic().get(x, y) a
 
 inline fun p5.Renderer.get(x: Int, y: Int, w: Int, h: Int): p5.Image = asDynamic().get(x, y, w, h) as p5.Image
 
+inline fun p5.Renderer.get(): p5.Image = asDynamic().get() as p5.Image
+
 /**
  * TODO doc
  */
