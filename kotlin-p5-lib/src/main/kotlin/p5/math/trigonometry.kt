@@ -12,7 +12,7 @@ import p5.core.p5
  * or 0 to 180 if the <a href="#/p5/angleMode">angleMode()</a> is DEGREES.
  *
  * @method acos
- * @param  {Number} value the value whose arc cosine is to be returned
+ * @param  {Number} [value] the value whose arc cosine is to be returned
  * @return {Number}       the arc cosine of the given value
  *
  * @example
@@ -52,7 +52,7 @@ inline fun p5.acos(value: Long): Double = asDynamic().acos(value) as Double
  * mode is DEGREES.
  *
  * @method asin
- * @param  {Number} value the value whose arc sine is to be returned
+ * @param  {Number} [value] the value whose arc sine is to be returned
  * @return {Number}       the arc sine of the given value
  *
  * @example
