@@ -585,5 +585,42 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
         companion object
     }
 
+    /**
+     *
+     * Base class for all p5.Dictionary types. Specifically
+     * typed Dictionary classes inherit from this class.
+     *
+     * @class p5.TypedDict
+     * @constructor
+     */
+    abstract class TypedDict<T>(key: T, value: T) {
+        constructor(dict: dynamic)
+
+        val data: dynamic
+    }
+
+    /**
+     *
+     * A simple Dictionary class for Strings.
+     *
+     * @class p5.StringDict
+     * @extends p5.TypedDict
+     */
+    class StringDict(key: String, value: String): TypedDict<String> {
+        constructor(dict: dynamic)
+    }
+
+    /**
+     *
+     * A simple Dictionary class for Numbers.
+     *
+     * @class p5.NumberDict
+     * @constructor
+     * @extends p5.TypedDict
+     */
+    class NumberDict(key: Number, value: Number): TypedDict<Number> {
+        constructor(dict: dynamic)
+    }
+
     companion object
 }
