@@ -83,6 +83,12 @@ import p5.core.p5
  */
 inline fun p5.noise(x: Double, y: Double? = undefined, z: Double? = undefined): Double = asDynamic().noise(x, y, z) as Double
 
+inline fun p5.noise(x: Float, y: Float? = undefined, z: Float? = undefined): Double = asDynamic().noise(x, y, z) as Double
+
+inline fun p5.noise(x: Int, y: Int? = undefined, z: Int? = undefined): Double = asDynamic().noise(x, y, z) as Double
+
+inline fun p5.noise(x: Long, y: Long? = undefined, z: Long? = undefined): Double = asDynamic().noise(x, y, z) as Double
+
 
 /**
  * Adjusts the character and level of detail produced by the Perlin noise
