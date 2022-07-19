@@ -20,6 +20,7 @@ package p5.core
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.TouchEvent
 import org.w3c.dom.events.KeyboardEvent
 import org.w3c.dom.events.MouseEvent
 import org.w3c.dom.events.WheelEvent
@@ -1376,6 +1377,175 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      * </div>
      */
     var mouseMoved: (MouseEvent) -> Unit
+
+
+    /**
+     * The <a href="#/p5/touchEnded">touchEnded()</a> function is called every time a touch ends. If no
+     * <a href="#/p5/touchEnded">touchEnded()</a> function is defined, the <a href="#/p5/mouseReleased">mouseReleased()</a> function will be
+     * called instead if it is defined.<br><br>
+     * Browsers may have different default behaviors attached to various touch
+     * events. To prevent any default behavior for this event, add "return false"
+     * to the end of the method.
+     *
+     * @method touchEnded
+     * @param  {Object} [event] optional TouchEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Release touch within the image to
+     * // change the value of the rectangle
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`50-by-50 black rect turns white with touch.`);
+     * }
+     * function touchEnded() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function touchEnded() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * describe('no image displayed');
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a TouchEvent object
+     * // as a callback argument
+     * function touchEnded(event) {
+     *   console.log(event);
+     * }
+     * describe('no image displayed');
+     * </code>
+     * </div>
+     */
+    var touchEnded: (TouchEvent) -> Unit
+
+    /**
+     * The <a href="#/p5/touchMoved">touchMoved()</a> function is called every time a touch move is registered.
+     * If no <a href="#/p5/touchMoved">touchMoved()</a> function is defined, the <a href="#/p5/mouseDragged">mouseDragged()</a> function will
+     * be called instead if it is defined.<br><br>
+     * Browsers may have different default behaviors attached to various touch
+     * events. To prevent any default behavior for this event, add "return false"
+     * to the end of the method.
+     *
+     * @method touchMoved
+     * @param  {Object} [event] optional TouchEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Move your finger across the page
+     * // to change its value
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`50-by-50 black rect turns lighter with touch until white. resets`);
+     * }
+     * function touchMoved() {
+     *   value = value + 5;
+     *   if (value > 255) {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function touchMoved() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * describe('no image displayed');
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a TouchEvent object
+     * // as a callback argument
+     * function touchMoved(event) {
+     *   console.log(event);
+     * }
+     * describe('no image displayed');
+     * </code>
+     * </div>
+     */
+    var touchMoved: (TouchEvent) -> Unit
+
+
+    /**
+     * The touchStarted() function is called once after every time a touch is
+     * registered. If no <a href="#/p5/touchStarted">touchStarted()</a> function is defined, the <a href="#/p5/mousePressed">mousePressed()</a>
+     * function will be called instead if it is defined.<br><br>
+     * Browsers may have different default behaviors attached to various touch
+     * events. To prevent any default behavior for this event, add "return false"
+     * to the end of the method.
+     *
+     * @method touchStarted
+     * @param  {Object} [event] optional TouchEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Touch within the image to change
+     * // the value of the rectangle
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`50-by-50 black rect turns white with touch event.`);
+     * }
+     * function touchStarted() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function touchStarted() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * describe('no image displayed');
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a TouchEvent object
+     * // as a callback argument
+     * function touchStarted(event) {
+     *   console.log(event);
+     * }
+     * describe('no image displayed');
+     * </code>
+     * </div>
+     */
+    var touchStarted: (TouchEvent) -> Unit
 
 
     companion object
