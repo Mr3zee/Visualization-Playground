@@ -287,6 +287,59 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
     }
 
     /**
+     * Extends <a href="#/p5.Element">p5.Element</a> to handle audio and video. In addition to the methods
+     * of <a href="#/p5.Element">p5.Element</a>, it also contains methods for controlling media. It is not
+     * called directly, but <a href="#/p5.MediaElement">p5.MediaElement</a>s are created by calling <a href="#/p5/createVideo">createVideo</a>,
+     * <a href="#/p5/createAudio">createAudio</a>, and <a href="#/p5/createCapture">createCapture</a>.
+     *
+     * @class p5.MediaElement
+     * @constructor
+     * @param {String} elt DOM node that is wrapped
+     */
+    class MediaElement(elt: String, pInst: p5): Element {
+
+        /**
+         * Path to the media element source.
+         *
+         * @property src
+         * @return {String} src
+         * @example
+         * <div><code>
+         * let ele;
+         *
+         * function setup() {
+         *   background(250);
+         *
+         *   //p5.MediaElement objects are usually created
+         *   //by calling the createAudio(), createVideo(),
+         *   //and createCapture() functions.
+         *
+         *   //In this example we create
+         *   //a new p5.MediaElement via createAudio().
+         *   ele = createAudio('assets/beat.mp3');
+         *
+         *   //We'll set up our example so that
+         *   //when you click on the text,
+         *   //an alert box displays the MediaElement's
+         *   //src field.
+         *   textAlign(CENTER);
+         *   text('Click Me!', width / 2, height / 2);
+         * }
+         *
+         * function mouseClicked() {
+         *   //here we test if the mouse is over the
+         *   //canvas element when it's clicked
+         *   if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+         *     //Show our p5.MediaElement's src field
+         *     alert(ele.src);
+         *   }
+         * }
+         * </code></div>
+         */
+        val src: String
+    }
+
+    /**
      * Creates a new <a href="#/p5.Image">p5.Image</a>. A <a href="#/p5.Image">p5.Image</a> is a canvas backed representation of an
      * image.
      *
@@ -620,6 +673,58 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      */
     class NumberDict(key: Number, value: Number): TypedDict<Number> {
         constructor(dict: dynamic)
+    }
+
+    /**
+     * Base class for a file.
+     * Used for Element.drop and createFileInput.
+     *
+     * @class p5.File
+     * @constructor
+     * @param {File} [file] File that is wrapped
+     */
+    class File(file: File?, pInst: p5) {
+        /**
+         * Underlying File object. All normal File methods can be called on this.
+         *
+         * @property file
+         */
+        val file: File
+
+        /**
+         * File type (image, text, etc.)
+         *
+         * @property type
+         */
+        val type: String
+
+        /**
+         * File subtype (usually the file extension jpg, png, xml, etc.)
+         *
+         * @property subtype
+         */
+        val subtype: String
+
+        /**
+         * File name
+         *
+         * @property name
+         */
+        val name: String
+        /**
+         * File size
+         *
+         * @property size
+         */
+        val size: Long
+
+        /**
+         * URL string containing either image data, the text contents of the file or
+         * a parsed object if file is JSON and p5.XML if XML
+         *
+         * @property data
+         */
+        val data: String?
     }
 
     companion object
