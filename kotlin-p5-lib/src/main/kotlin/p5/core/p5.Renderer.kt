@@ -9,6 +9,8 @@
 
 package p5.core
 
+import p5.typography.TextAlignProps
+
 // the renderer should return a 'style' object that it wishes to
 // store on the push stack.
 inline fun p5.Renderer.push() = asDynamic().push()
@@ -64,17 +66,12 @@ inline fun p5.Renderer.textAscent(): Int = asDynamic().textAscent() as Int
 inline fun p5.Renderer.textDescent(): Int = asDynamic().textDescent() as Int
 
 
-external interface TextAlignProperties {
-    var horizontal: Int
-    var vertical: Int
-}
 /**
- * TODO doc
+ * @see [p5.typography.textAlign]
  */
-inline fun p5.Renderer.textAlign(h: Int, v: Int) { asDynamic().textAlign(h, v) }
+inline fun p5.Renderer.textAlign(h: String, v: String): p5 = asDynamic().textAlign(h, v) as p5
 
-@Suppress("UnsafeCastFromDynamic")
-inline fun p5.Renderer.textAlign(): TextAlignProperties = asDynamic().textAlign()
+inline fun p5.Renderer.textAlign(): TextAlignProps = asDynamic().textAlign().unsafeCast<TextAlignProps>()
 
 /**
  * TODO doc
