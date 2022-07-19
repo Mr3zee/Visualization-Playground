@@ -20,6 +20,7 @@ package p5.core
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.events.KeyboardEvent
 
 @JsModule("p5")
 external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
@@ -847,6 +848,152 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      * </div>
      */
     var deviceMoved: () -> Unit
+
+    /**
+     * The <a href="#/p5/keyTyped">keyTyped()</a> function is called once every time a key is pressed, but
+     * action keys such as Backspace, Delete, Ctrl, Shift, and Alt are ignored. If you are trying to detect
+     * a keyCode for one of these keys, use the <a href="#/p5/keyPressed">keyPressed()</a> function instead.
+     * The most recent key typed will be stored in the key variable.
+     *
+     * Because of how operating systems handle key repeats, holding down a key
+     * will cause multiple calls to <a href="#/p5/keyTyped">keyTyped()</a> (and <a href="#/p5/keyReleased">keyReleased()</a> as well). The
+     * rate of repeat is set by the operating system and how each computer is
+     * configured.<br><br>
+     * Browsers may have different default behaviors attached to various key
+     * events. To prevent any default behavior for this event, add "return false"
+     * to the end of the function.
+     *
+     * @method keyTyped
+     * @param  {Object} [event] optional KeyboardEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black rect center. turns white when 'a' key typed and
+     *     black when 'b' pressed`);
+     * }
+     * function keyTyped() {
+     *   if (key === 'a') {
+     *     value = 255;
+     *   } else if (key === 'b') {
+     *     value = 0;
+     *   }
+     *   // uncomment to prevent any default behavior
+     *   // return false;
+     * }
+     * </code>
+     * </div>
+     */
+    var keyTyped: (KeyboardEvent) -> Unit
+
+
+    /**
+     * The <a href="#/p5/keyReleased">keyReleased()</a> function is called once every time a key is released.
+     * See <a href="#/p5/key">key</a> and <a href="#/p5/keyCode">keyCode</a> for more information.<br><br>
+     * Browsers may have different default
+     * behaviors attached to various key events. To prevent any default
+     * behavior for this event, add "return false" to the end of the function.
+     *
+     * @method keyReleased
+     * @param  {Object} [event] optional KeyboardEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black rect center. turns white when key pressed and black
+     *     when pressed again`);
+     * }
+     * function keyReleased() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else {
+     *     value = 0;
+     *   }
+     *   return false; // prevent any default behavior
+     * }
+     * </code>
+     * </div>
+     */
+    var keyReleased: (KeyboardEvent) -> Unit
+
+
+    /**
+     * The <a href="#/p5/keyPressed">keyPressed()</a> function is called once every time a key is pressed. The
+     * keyCode for the key that was pressed is stored in the <a href="#/p5/keyCode">keyCode</a> variable.
+     *
+     * For non-ASCII keys, use the keyCode variable. You can check if the keyCode
+     * equals BACKSPACE, DELETE, ENTER, RETURN, TAB, ESCAPE, SHIFT, CONTROL,
+     * OPTION, ALT, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW.
+     *
+     * For ASCII keys, the key that was pressed is stored in the key variable. However, it
+     * does not distinguish between uppercase and lowercase. For this reason, it
+     * is recommended to use <a href="#/p5/keyTyped">keyTyped()</a> to read the key variable, in which the
+     * case of the variable will be distinguished.
+     *
+     * Because of how operating systems handle key repeats, holding down a key
+     * may cause multiple calls to <a href="#/p5/keyTyped">keyTyped()</a> (and <a href="#/p5/keyReleased">keyReleased()</a> as well). The
+     * rate of repeat is set by the operating system and how each computer is
+     * configured.<br><br>
+     * Browsers may have different default
+     * behaviors attached to various key events. To prevent any default
+     * behavior for this event, add "return false" to the end of the method.
+     *
+     * @method keyPressed
+     * @param  {Object} [event] optional KeyboardEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black rect center. turns white when key pressed and black
+     *     when released.`);
+     * }
+     * function keyPressed() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     * <div>
+     * <code>
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black rect center. turns white when left arrow pressed and
+     *     black when right.`);
+     * }
+     * function keyPressed() {
+     *   if (keyCode === LEFT_ARROW) {
+     *     value = 255;
+     *   } else if (keyCode === RIGHT_ARROW) {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     * <div class="norender">
+     * <code>
+     * function keyPressed() {
+     *   // Do something
+     *   return false; // prevent any default behaviour
+     * }
+     * </code>
+     * </div>
+     */
+    var keyPressed: (KeyboardEvent) -> Unit
+
 
     companion object
 }
