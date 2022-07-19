@@ -677,7 +677,7 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
 
     /**
      * Base class for a file.
-     * Used for Element.drop and createFileInput.
+     * Used for [Element.drop] and createFileInput.
      *
      * @class p5.File
      * @constructor
@@ -726,6 +726,127 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
          */
         val data: String?
     }
+
+    /**
+     * The <a href="#/p5/deviceShaken">deviceShaken()</a> function is called when the device total acceleration
+     * changes of accelerationX and accelerationY values is more than
+     * the threshold value. The default threshold is set to 30.
+     * The threshold value can be changed using <a href="https://p5js.org/reference/#/p5/setShakeThreshold">setShakeThreshold()</a>.
+     *
+     * @method deviceShaken
+     * @example
+     * <div class="norender">
+     * <code>
+     * // Run this example on a mobile device
+     * // Shake the device to change the value.
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`50-by-50 black rect in center of canvas.
+     *     turns white on mobile when device shakes`);
+     * }
+     * function deviceShaken() {
+     *   value = value + 5;
+     *   if (value > 255) {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     */
+    var deviceShaken: () -> Unit
+
+    /**
+     * The <a href="#/p5/deviceTurned">deviceTurned()</a> function is called when the device rotates by
+     * more than 90 degrees continuously.
+     *
+     * The axis that triggers the <a href="#/p5/deviceTurned">deviceTurned()</a> method is stored in the turnAxis
+     * variable. The <a href="#/p5/deviceTurned">deviceTurned()</a> method can be locked to trigger on any axis:
+     * X, Y or Z by comparing the turnAxis variable to 'X', 'Y' or 'Z'.
+     *
+     * @method deviceTurned
+     * @example
+     * <div class="norender">
+     * <code>
+     * // Run this example on a mobile device
+     * // Rotate the device by 90 degrees
+     * // to change the value.
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`50-by-50 black rect in center of canvas.
+     *     turns white on mobile when device turns`);
+     * }
+     * function deviceTurned() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else if (value === 255) {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     * <div>
+     * <code>
+     * // Run this example on a mobile device
+     * // Rotate the device by 90 degrees in the
+     * // X-axis to change the value.
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`50-by-50 black rect in center of canvas.
+     *     turns white on mobile when x-axis turns`);
+     * }
+     * function deviceTurned() {
+     *   if (turnAxis === 'X') {
+     *     if (value === 0) {
+     *       value = 255;
+     *     } else if (value === 255) {
+     *       value = 0;
+     *     }
+     *   }
+     * }
+     * </code>
+     * </div>
+     */
+    var deviceTurned: () -> Unit
+
+    /**
+     * The <a href="#/p5/deviceMoved">deviceMoved()</a> function is called when the device is moved by more than
+     * the threshold value along X, Y or Z axis. The default threshold is set to 0.5.
+     * The threshold value can be changed using <a href="https://p5js.org/reference/#/p5/setMoveThreshold">setMoveThreshold()</a>.
+     *
+     * @method deviceMoved
+     * @example
+     * <div class="norender">
+     * <code>
+     * // Run this example on a mobile device
+     * // Move the device around
+     * // to change the value.
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`50-by-50 black rect in center of canvas.
+     *     turns white on mobile when device moves`);
+     * }
+     * function deviceMoved() {
+     *   value = value + 5;
+     *   if (value > 255) {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     */
+    var deviceMoved: () -> Unit
 
     companion object
 }
