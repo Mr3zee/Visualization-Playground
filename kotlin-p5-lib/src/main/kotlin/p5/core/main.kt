@@ -21,6 +21,8 @@ import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.KeyboardEvent
+import org.w3c.dom.events.MouseEvent
+import org.w3c.dom.events.WheelEvent
 
 @JsModule("p5")
 external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
@@ -993,6 +995,387 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      * </div>
      */
     var keyPressed: (KeyboardEvent) -> Unit
+
+
+    /**
+     * The function <a href="#/p5/mouseWheel">mouseWheel()</a> is executed every time a vertical mouse wheel
+     * event is detected either triggered by an actual mouse wheel or by a
+     * touchpad.<br><br>
+     * The event.delta property returns the amount the mouse wheel
+     * have scrolled. The values can be positive or negative depending on the
+     * scroll direction (on macOS with "natural" scrolling enabled, the signs
+     * are inverted).<br><br>
+     * Browsers may have different default behaviors attached to various
+     * mouse events. To prevent any default behavior for this event, add
+     * "return false" to the end of the method.<br><br>
+     * Due to the current support of the "wheel" event on Safari, the function
+     * may only work as expected if "return false" is included while using Safari.
+     *
+     * @method mouseWheel
+     * @param  {Object} [event] optional WheelEvent callback argument.
+     *
+     * @example
+     * <div>
+     * <code>
+     * let pos = 25;
+     *
+     * function draw() {
+     *   background(237, 34, 93);
+     *   fill(0);
+     *   rect(25, pos, 50, 50);
+     *   describe(`black 50-by-50 rect moves up and down with vertical scroll.
+     *     fuchsia background`);
+     * }
+     *
+     * function mouseWheel(event) {
+     *   print(event.delta);
+     *   //move the square according to the vertical scroll amount
+     *   pos += event.delta;
+     *   //uncomment to block page scrolling
+     *   //return false;
+     * }
+     * </code>
+     * </div>
+     */
+    var mouseWheel: (WheelEvent) -> Unit
+
+
+    /**
+     * The <a href="#/p5/doubleClicked">doubleClicked()</a> function is executed every time a event
+     * listener has detected a dblclick event which is a part of the
+     * DOM L3 specification. The doubleClicked event is fired when a
+     * pointing device button (usually a mouse's primary button)
+     * is clicked twice on a single element. For more info on the
+     * dblclick event refer to mozilla's documentation here:
+     * https://developer.mozilla.org/en-US/docs/Web/Events/dblclick
+     *
+     * @method doubleClicked
+     * @param  {Object} [event] optional MouseEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Click within the image to change
+     * // the value of the rectangle
+     * // after the mouse has been double clicked
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black 50-by-50 rect turns white with mouse doubleClick/press.`);
+     * }
+     *
+     * function doubleClicked() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function doubleClicked() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a MouseEvent object
+     * // as a callback argument
+     * function doubleClicked(event) {
+     *   console.log(event);
+     * }
+     * </code>
+     * </div>
+     */
+    var doubleClicked: (MouseEvent) -> Unit
+
+
+    /**
+     * The <a href="#/p5/mouseClicked">mouseClicked()</a> function is called once after a mouse button has been
+     * pressed and then released.<br><br>
+     * Browsers handle clicks differently, so this function is only guaranteed to be
+     * run when the left mouse button is clicked. To handle other mouse buttons
+     * being pressed or released, see <a href="#/p5/mousePressed">mousePressed()</a> or <a href="#/p5/mouseReleased">mouseReleased()</a>.<br><br>
+     * Browsers may have different default
+     * behaviors attached to various mouse events. To prevent any default
+     * behavior for this event, add "return false" to the end of the function.
+     *
+     * @method mouseClicked
+     * @param  {Object} [event] optional MouseEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Click within the image to change
+     * // the value of the rectangle
+     * // after the mouse has been clicked
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black 50-by-50 rect turns white with mouse click/press.`);
+     * }
+     *
+     * function mouseClicked() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function mouseClicked() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a MouseEvent object
+     * // as a callback argument
+     * function mouseClicked(event) {
+     *   console.log(event);
+     * }
+     * </code>
+     * </div>
+     */
+    var mouseClicked: (MouseEvent) -> Unit
+
+    /**
+     * The <a href="#/p5/mouseReleased">mouseReleased()</a> function is called every time a mouse button is
+     * released. If no <a href="#/p5/mouseReleased">mouseReleased()</a> function is defined, the <a href="#/p5/touchEnded">touchEnded()</a>
+     * function will be called instead if it is defined.<br><br>
+     * Browsers may have different default
+     * behaviors attached to various mouse events. To prevent any default
+     * behavior for this event, add "return false" to the end of the function.
+     *
+     * @method mouseReleased
+     * @param  {Object} [event] optional MouseEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Click within the image to change
+     * // the value of the rectangle
+     * // after the mouse has been clicked
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black 50-by-50 rect turns white with mouse click/press.`);
+     * }
+     * function mouseReleased() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function mouseReleased() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a MouseEvent object
+     * // as a callback argument
+     * function mouseReleased(event) {
+     *   console.log(event);
+     * }
+     * </code>
+     * </div>
+     */
+    var mouseReleased: (MouseEvent) -> Unit
+
+
+    /**
+     * The <a href="#/p5/mousePressed">mousePressed()</a> function is called once after every time a mouse button
+     * is pressed. The mouseButton variable (see the related reference entry)
+     * can be used to determine which button has been pressed. If no
+     * <a href="#/p5/mousePressed">mousePressed()</a> function is defined, the <a href="#/p5/touchStarted">touchStarted()</a> function will be
+     * called instead if it is defined.<br><br>
+     * Browsers may have different default
+     * behaviors attached to various mouse events. To prevent any default
+     * behavior for this event, add "return false" to the end of the function.
+     *
+     * @method mousePressed
+     * @param  {Object} [event] optional MouseEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Click within the image to change
+     * // the value of the rectangle
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black 50-by-50 rect turns white with mouse click/press.`);
+     * }
+     * function mousePressed() {
+     *   if (value === 0) {
+     *     value = 255;
+     *   } else {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function mousePressed() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a MouseEvent object
+     * // as a callback argument
+     * function mousePressed(event) {
+     *   console.log(event);
+     * }
+     * </code>
+     * </div>
+     */
+    var mousePressed: (MouseEvent) -> Unit
+
+
+    /**
+     * The <a href="#/p5/mouseDragged">mouseDragged()</a> function is called once every time the mouse moves and
+     * a mouse button is pressed. If no <a href="#/p5/mouseDragged">mouseDragged()</a> function is defined, the
+     * <a href="#/p5/touchMoved">touchMoved()</a> function will be called instead if it is defined.<br><br>
+     * Browsers may have different default
+     * behaviors attached to various mouse events. To prevent any default
+     * behavior for this event, add "return false" to the end of the function.
+     *
+     * @method mouseDragged
+     * @param  {Object} [event] optional MouseEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Drag the mouse across the page
+     * // to change its value
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black 50-by-50 rect turns lighter with mouse click and
+     *     drag until white, resets`);
+     * }
+     * function mouseDragged() {
+     *   value = value + 5;
+     *   if (value > 255) {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function mouseDragged() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a MouseEvent object
+     * // as a callback argument
+     * function mouseDragged(event) {
+     *   console.log(event);
+     * }
+     * </code>
+     * </div>
+     */
+    var mouseDragged: (MouseEvent) -> Unit
+
+
+    /**
+     * The <a href="#/p5/mouseMoved">mouseMoved()</a> function is called every time the mouse moves and a mouse
+     * button is not pressed.<br><br>
+     * Browsers may have different default
+     * behaviors attached to various mouse events. To prevent any default
+     * behavior for this event, add "return false" to the end of the method.
+     *
+     * @method mouseMoved
+     * @param  {Object} [event] optional MouseEvent callback argument.
+     * @example
+     * <div>
+     * <code>
+     * // Move the mouse across the page
+     * // to change its value
+     *
+     * let value = 0;
+     * function draw() {
+     *   fill(value);
+     *   rect(25, 25, 50, 50);
+     *   describe(`black 50-by-50 rect becomes lighter with mouse movements until
+     *   white then resets no image displayed`);
+     * }
+     * function mouseMoved() {
+     *   value = value + 5;
+     *   if (value > 255) {
+     *     value = 0;
+     *   }
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * function mouseMoved() {
+     *   ellipse(mouseX, mouseY, 5, 5);
+     *   // prevent default
+     *   return false;
+     * }
+     * </code>
+     * </div>
+     *
+     * <div class="norender">
+     * <code>
+     * // returns a MouseEvent object
+     * // as a callback argument
+     * function mouseMoved(event) {
+     *   console.log(event);
+     * }
+     * </code>
+     * </div>
+     */
+    var mouseMoved: (MouseEvent) -> Unit
 
 
     companion object
