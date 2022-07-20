@@ -1562,6 +1562,7 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
          * Underlying opentype font implementation
          * @property font
          */
+        // TODO opentype.js
         val font: Object
     }
 

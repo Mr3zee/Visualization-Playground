@@ -80,9 +80,8 @@ inline fun p5.Renderer.textWrap(wrapStyle: String): String = asDynamic().textWra
 
 
 /**
- * TODO doc
+ * @see [p5.typography.text]
  */
-inline fun p5.Renderer.text(str: String, x: Int, y: Int, maxWidth: Int? = null, maxHeight: Int? = null) {
-    asDynamic().text(str, x, y, maxWidth ?: undefined, maxHeight ?: undefined)
-}
+inline fun p5.Renderer.text(str: Any?, x: Int, y: Int, maxWidth: Int? = undefined, maxHeight: Int? = undefined): p5 =
+    asDynamic().text(str, x, y, maxWidth , maxHeight).unsafeCast<p5>()
 
