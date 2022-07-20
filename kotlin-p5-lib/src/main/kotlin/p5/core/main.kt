@@ -17,6 +17,7 @@
 
 package p5.core
 
+import kotlinx.js.Object
 import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLElement
@@ -1042,7 +1043,7 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
 
 
     /**
-     * The <a href="#/p5/doubleClicked">doubleClicked()</a> function is executed every time a event
+     * The <a href="#/p5/doubleClicked">doubleClicked()</a> function is executed every time an event
      * listener has detected a dblclick event which is a part of the
      * DOM L3 specification. The doubleClicked event is fired when a
      * pointing device button (usually a mouse's primary button)
@@ -1546,6 +1547,23 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
      * </div>
      */
     var touchStarted: (TouchEvent) -> Unit
+
+
+    /**
+     * Base class for font handling
+     * @class p5.Font
+     * @constructor
+     * @param {p5} [pInst] pointer to p5 instance
+     */
+    class Font(p: p5) {
+        val parent: p5
+
+        /**
+         * Underlying opentype font implementation
+         * @property font
+         */
+        val font: Object
+    }
 
 
     companion object
