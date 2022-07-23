@@ -1566,6 +1566,80 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
         val font: Object
     }
 
+    /**
+     *  <a href="#/p5.Table">Table</a> objects store data with multiple rows and columns, much
+     *  like in a traditional spreadsheet. Tables can be generated from
+     *  scratch, dynamically, or using data from an existing file.
+     *
+     *  @class p5.Table
+     *  @constructor
+     *  @param  {p5.TableRow[]} [rows] An array of p5.TableRow objects
+     */
+    class Table(rows: Array<TableRow>) {
+        /**
+         * An array containing the names of the columns in the table, if the "header" the table is
+         * loaded with the "header" parameter.
+         * @property columns {String[]}
+         * @example
+         * <div class="norender">
+         * <code>
+         * // Given the CSV file "mammals.csv"
+         * // in the project's "assets" folder:
+         * //
+         * // id,species,name
+         * // 0,Capra hircus,Goat
+         * // 1,Panthera pardus,Leopard
+         * // 2,Equus zebra,Zebra
+         *
+         * let table;
+         *
+         * function preload() {
+         *   //my table is comma separated value "csv"
+         *   //and has a header specifying the columns labels
+         *   table = loadTable('assets/mammals.csv', 'csv', 'header');
+         * }
+         *
+         * function setup() {
+         *   //print the column names
+         *   for (let c = 0; c < table.getColumnCount(); c++) {
+         *     print('column ' + c + ' is named ' + table.columns[c]);
+         *   }
+         * }
+         * </code>
+         * </div>
+         */
+        val columns: Array<String>
+
+        /**
+         * An array containing the <a href="#/p5.Table">p5.TableRow</a> objects that make up the
+         * rows of the table. The same result as calling <a href="#/p5/getRows">getRows()</a>
+         * @property rows {p5.TableRow[]}
+         */
+        val rows: Array<TableRow>
+    }
+
+    /**
+     *  A TableRow object represents a single row of data values,
+     *  stored in columns, from a table.
+     *
+     *  A Table Row contains both an ordered array, and an unordered
+     *  JSON object.
+     *
+     *  @class p5.TableRow
+     *  @constructor
+     *  @param {String} [str] optional: populate the row with a
+     *                        string of values, separated by the
+     *                        separator
+     *  @param {String} [separator] comma separated values (csv) by default
+     */
+    class TableRow(str: String? = definedExternally, separator: String? = definedExternally) {
+        val arr: Array<String>
+
+        val obj: Object
+
+        val table: Table?
+    }
+
 
     companion object
 }
