@@ -1640,6 +1640,54 @@ external class p5(sketch: (p5) -> Unit, node: HTMLElement) {
         val table: Table?
     }
 
+    /**
+     * XML is a representation of an XML object, able to parse XML code. Use
+     * <a href="#/p5/loadXML">loadXML()</a> to load external XML files and create XML objects.
+     *
+     * @class p5.XML
+     * @constructor
+     * @example
+     * <div class='norender'><code>
+     * // The following short XML file called "mammals.xml" is parsed
+     * // in the code below.
+     * //
+     * // <?xml version="1.0"?>
+     * // &lt;mammals&gt;
+     * //   &lt;animal id="0" species="Capra hircus">Goat&lt;/animal&gt;
+     * //   &lt;animal id="1" species="Panthera pardus">Leopard&lt;/animal&gt;
+     * //   &lt;animal id="2" species="Equus zebra">Zebra&lt;/animal&gt;
+     * // &lt;/mammals&gt;
+     *
+     * let xml;
+     *
+     * function preload() {
+     *   xml = loadXML('assets/mammals.xml');
+     * }
+     *
+     * function setup() {
+     *   let children = xml.getChildren('animal');
+     *
+     *   for (let i = 0; i < children.length; i++) {
+     *     let id = children[i].getNum('id');
+     *     let coloring = children[i].getString('species');
+     *     let name = children[i].getContent();
+     *     print(id + ', ' + coloring + ', ' + name);
+     *   }
+     *
+     *   describe(`no image displayed`);
+     * }
+     *
+     * // Sketch prints:
+     * // 0, Capra hircus, Goat
+     * // 1, Panthera pardus, Leopard
+     * // 2, Equus zebra, Zebra
+     * </code></div>
+     */
+    class XML(DOM: org.w3c.dom.Element? = definedExternally) {
+        @Suppress("PropertyName")
+        val DOM: org.w3c.dom.Element
+    }
+
 
     companion object
 }
